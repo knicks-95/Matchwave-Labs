@@ -1,0 +1,230 @@
+/* 
+ * animations.css
+ * Contains all animations and transitions used throughout the website
+ */
+
+/* Reveal text animation */
+.reveal-text {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal-text.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Reveal item animation */
+.reveal-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+    transition-delay: 100ms;
+}
+
+.reveal-item.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered reveal for multiple items */
+.reveal-item:nth-child(1) { transition-delay: 100ms; }
+.reveal-item:nth-child(2) { transition-delay: 150ms; }
+.reveal-item:nth-child(3) { transition-delay: 200ms; }
+.reveal-item:nth-child(4) { transition-delay: 250ms; }
+.reveal-item:nth-child(5) { transition-delay: 300ms; }
+.reveal-item:nth-child(6) { transition-delay: 350ms; }
+
+/* Navigation link hover effect */
+.nav-link {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Pulse animation for the primary CTA button */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+}
+
+.btn-primary {
+    animation: pulse 2s infinite;
+}
+
+.btn-primary:hover {
+    animation: none;
+}
+
+/* Service card hover animation */
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: linear-gradient(45deg, 
+        var(--color-primary-500), 
+        transparent 30%,
+        transparent 70%, 
+        var(--color-accent-500));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+/* Form input focus effect */
+@keyframes borderPulse {
+    0% {
+        border-color: var(--color-primary-500);
+    }
+    50% {
+        border-color: var(--color-secondary-500);
+    }
+    100% {
+        border-color: var(--color-primary-500);
+    }
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    animation: borderPulse 2s ease infinite;
+}
+
+/* Menu item icon animation */
+.menu-item .menu-icon {
+    transition: transform var(--transition-normal);
+}
+
+.menu-item:hover .menu-icon {
+    transform: scale(1.1);
+}
+
+/* Floating animation for the hero card */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.hero-image .glass-card {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Menu item active state animation */
+.menu-item.active {
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-item.active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600));
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* Logo animation */
+@keyframes logoPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.logo-icon {
+    animation: logoPulse 3s ease-in-out infinite;
+}
+
+/* Gradient text animation */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.section-title {
+    background-size: 200% auto;
+    animation: gradientShift 3s ease infinite;
+}
+
+/* Submit button animation */
+.submit-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    transform-origin: 50% 50%;
+}
+
+.submit-btn:hover::after {
+    animation: ripple 1s;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
